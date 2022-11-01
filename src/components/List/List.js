@@ -13,7 +13,7 @@ const List = () => {
              ${Column({ title: 'Books' })}
              ${Column({ title: 'Movies' })}
              ${Column({ title: 'Games' })}
-         </section>
+          </section>
       </div>
     );
   };

@@ -1,11 +1,21 @@
-import styles from './Column.module.scss'
+import styles from './Column.module.scss';
+import List from '../List/List';
 
-const Column = props => {
-    return (
-        <article className={styles.column}>
-            <h2 className={styles.title}><span> className={Column.module.scss fa fa-icon} </span>{props.title}</h2>
-        </article>
-    );
-};
+
+
+
+const Column = (props) => {
+  return (
+   
+  <article className={styles.column}>
+    
+    <h2 className={styles.title}>
+    <span className={styles.icon + ' fa fa-' + props.icon} />
+      {props.title}
+      </h2>
+   </article>
+  
+  )};
+  
 
 export default Column;
