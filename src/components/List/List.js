@@ -1,76 +1,38 @@
-import styles from './List.module.scss'
-import Column from '../Column/Column.js'
-import ColumnForm from '../ColumnForm/ColumnForm';
-import { useState } from 'react';
-import shortid from 'shortid';
-import CardForm from '../CardForm/CardForm';
+import styles from './List.module.scss';
+import Column from './../Column/Column';
+import ColumnForm from './../ColumnForm/ColumnForm';
+import SearchForm from '../SearchForm/SearchForm';
+import { useSelector } from 'react-redux';
+import { getColumnsByList } from '../../redux/columnsRedux';
+import { getListById } from '../../redux/listsRedux';
+import { useParams, Navigate } from 'react-router-dom';
 
+const List = () => {
 
-const List = () =>{
-  const [columns, setColumns] = useState([
-    {
-      id: 1,
-      title: 'Books',
-      icon: 'book',
-      cards: [
-        { id: 1, title: 'Do not come back' },
-        { id: 2, title: 'happy wife happy life' }
-      ]
-    },
-    {
-      id: 2,
-      title: 'Movies',
-      icon: 'film',
-      cards: [
-        { id: 1, title: 'Hobbit' },
-        { id: 2, title: 'Pitch perfect' }
-      ]
-    },
-    {
-      id: 3,
-      title: 'Games',
-      icon: 'gamepad',
-      cards: [
-        { id: 1, title: 'Star' },
-        { id: 2, title: 'Sims' }
-      ]
-    }
-  ]);
+	const { listId } =useParams();
 
+	const columns = useSelector(state => getColumnsByList(state, listId));
 
-        const addColumn = newColumn => {
-          setColumns([...columns, { id: shortid(), title: newColumn.title, icon: newColumn.icon, cards:[] }]);
-      };
+	const listData = useSelector(state => getListById(state, listId));
 
-      const addCard = (newCard, columnId) => {
-        const columnsUpdated = columns.map(column => {
-          if(column.id === columnId)
-            return { ...column, cards: [...column.cards, { id: shortid(), title: newCard.title }]}
-          else
-            return column
-        })
-      
-        setColumns(columnsUpdated);
-      };
+	if(!listData) return <Navigate to="/" />
 
-        return(
-        <div>
-        <header className={styles.header}>
-          
-          <h1 className={styles.title}>Things to do<span>soon</span></h1>
-          <p className={styles.description}>Interesting things I want to check out</p>
-      
-        </header>
-        <section className={styles.columns}> 
-          {columns.map(column => <Column addCard={addCard} key={column.id} id={column.id} title={column.title} icon={column.icon} cards={column.cards} {...column}  />)}
-        </section>
-        <ColumnForm action={addColumn} />
-      
-          </div>
-          
-          );
+  return (
+		<div className={styles.list}>
+			<header className={styles.header}>
+        <h2 className={styles.title}>{listData.title}</h2>
+			</header>
+			<p className={styles.description}>{listData.description}</p>
+			<SearchForm />
+			<section className={styles.columns}>
+				{columns.map(column =>
+					<Column
+						key={column.id} {...column}  />
+				)}
+			</section>
+			<ColumnForm listId={listId} />
+		</div>
+	);
+};
 
-      
-  };
-  
-  export default List;
+export default List;

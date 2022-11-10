@@ -1,10 +1,8 @@
 import { createStore } from 'redux';
+import initialState from './initialStore';
+
 const reducer = (state, action) => {
   return state;
-};
-
-const initialState = {
-  columns: []
 };
 
 const store = createStore(
