@@ -3,7 +3,7 @@ import Column from '../Column/Column.js';
 import ColumnForm from '../ColumnForm/ColumnForm';
 import { useSelector } from 'react-redux';
 import { getListById, getColumnsByList } from '../../redux/store';
-import { useParams, Navigate } from 'react-router';
+import { useParams, Navigate } from 'react-router-dom';
 import SearchForm from '../SearchForm/SearchForm';
 
 const List = () => {
