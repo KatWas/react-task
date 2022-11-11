@@ -4,7 +4,7 @@ import PageTitle from '../PageTitle/PageTitle';
 const NotFound = () => {
   return (
     <div className={styles.hero}>
-      <PageTitle>NotFound at All Bro!</PageTitle>
+      <PageTitle>NotFound...</PageTitle>
       <p>lorem ipsum</p>
     </div>
   );
