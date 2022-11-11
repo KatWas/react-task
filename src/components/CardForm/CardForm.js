@@ -21,7 +21,7 @@ return (
           <TextInput value={title}  onChange={e => setTitle(e.target.value)} />
                 <Button>Add Card </Button>
       </form>
-      );
+  );
 }
 
 export default CardForm;

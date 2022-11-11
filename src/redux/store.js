@@ -1,19 +1,59 @@
 import { createStore } from 'redux';
 import initialState from './initialState';
 import shortid from 'shortid';
-import searchStringReducer from './searchStringRedux';
+
+//selectors
+
+export const getAllLists = (state) => state.lists;
+export const stateSearchString = (state) => state.searchString;
+
+export const getListById = ({ lists }, listId) =>
+  lists.find((list) => list.id === listId);
+
+export const getColumnsByList = ({ columns }, listId) =>
+  columns.filter((column) => column.listId === listId);
+
+export const getAllColumns = (state) => state.columns;
+
+export const getFilteredCards = ({ cards, searchString }, columnId) =>
+  cards.filter(
+    (card) =>
+      card.columnId === columnId &&
+      card.title.toLowerCase().includes(searchString.toLowerCase())
+  );
+
+// action creators
+export const addColumn = (payload) => ({ type: 'ADD_COLUMN', payload });
+export const addCard = (payload) => ({ type: 'ADD_CARD', payload });
+export const addList = (payload) => ({ type: 'ADD_LIST', payload });
+
+export const updateSearchString = (payload) => ({
+  type: 'UPDATE_SEARCHSTRING',
+  payload,
+});
 
 const reducer = (state, action) => {
-  switch(action.type) {
+  switch (action.type) {
     case 'ADD_COLUMN':
-      return { ...state, columns: [...state.columns, { ...action.payload, id: shortid() }]};
+      return {
+        ...state,
+        columns: [...state.columns, { ...action.payload, id: shortid() }],
+      };
     case 'ADD_CARD':
-      return { ...state, cards: [...state.cards, { ...action.payload, id: shortid() }]};
+      return {
+        ...state,
+        cards: [...state.cards, { ...action.payload, id: shortid() }],
+      };
+      case 'ADD_LIST':
+      return {
+        ...state,
+        lists: [...state.lists, { ...action.payload, id: shortid() }],
+      };
+    case 'UPDATE_SEARCHSTRING':
+      return { ...state, searchString: action.payload };
+
     default:
       return state;
-    case 'UPDATE_SEARCHSTRING':
-
-     return { ...state, searchString: action.payload };
   }
 };
 
