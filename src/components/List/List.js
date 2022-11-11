@@ -8,7 +8,7 @@ import SearchForm from '../SearchForm/SearchForm';
 
 const List = () => {
   const { listId } = useParams();
-  // console.log(listId);
+  console.log(listId);
   const columns = useSelector((state) => getColumnsByList(state, listId));
 
   const listData = useSelector((state) => getListById(state, listId));
