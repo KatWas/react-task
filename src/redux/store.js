@@ -1,7 +1,7 @@
 import { createStore } from 'redux';
 import initialState from './initialState';
 import shortid from 'shortid';
-
+import searchStringReducer from './searchStringRedux';
 
 const reducer = (state, action) => {
   switch(action.type) {
@@ -11,6 +11,9 @@ const reducer = (state, action) => {
       return { ...state, cards: [...state.cards, { ...action.payload, id: shortid() }]};
     default:
       return state;
+    case 'UPDATE_SEARCHSTRING':
+
+     return { ...state, searchString: action.payload };
   }
 };
 

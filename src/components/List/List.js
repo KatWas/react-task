@@ -7,6 +7,8 @@ import { getColumnsByList } from '../../redux/columnsRedux';
 import { getListById } from '../../redux/listsRedux';
 import { useParams, Navigate } from 'react-router-dom';
 
+
+
 const List = () => {
 
 	const { listId } =useParams();
