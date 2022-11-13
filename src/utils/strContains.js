@@ -3,3 +3,4 @@ export const strContains = (firstString, secondString) => {
       return true;
     else return false;
   };
+  export default strContains;

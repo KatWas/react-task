@@ -1,40 +1,31 @@
 import styles from './ListForm.module.scss';
 import { useState } from 'react';
-import Button from '../Button/Button.js';
+import Button from '../Button/Button';
+import TextInput from '../TextInput/TextInput';
 import { useDispatch } from 'react-redux';
-import { addList } from '../../redux/store';
+import { addList } from '../../redux/listsRedux';
 
-const ListForm = (props) => {
-  const dispatch = useDispatch();
+const ListForm = () => {
+
   const [title, setTitle] = useState('');
   const [description, setDescription] = useState('');
 
-  const handleSubmit = (e) => {
+  const dispatch = useDispatch();
+
+  const handleSubmit = e => {
     e.preventDefault();
     dispatch(addList({ title, description }));
-    setTitle(' ');
-    setDescription(' ');
-  };
+    setTitle('');
+    setDescription('');
+ };
 
-  return (
+	return (
     <form className={styles.listForm} onSubmit={handleSubmit}>
-      <span className={styles.span}>Title:</span>
-      <input
-        className={styles.input}
-        type='text'
-        value={title}
-        onChange={(e) => setTitle(e.target.value)}
-      />
-      <span className={styles.span}>Description: </span>{' '}
-      <input
-        className={styles.input}
-        type='text'
-        value={description}
-        onChange={(e) => setDescription(e.target.value)}
-      />
-      <Button>ADD COLUMN </Button>
+      <span className={styles.inputName}>Title:</span> <TextInput type="text" value={title} onChange={e => setTitle(e.target.value)} />
+      <span className={styles.inputName}>Description:</span> <TextInput type="text" value={description} onChange={e => setDescription(e.target.value)} />
+      <Button>Add List</Button>
     </form>
-  );
+	);
 };
 
 export default ListForm;
