@@ -3,23 +3,25 @@ import NavBar from './components/NavBar/NavBar';
 import Home from './components/Home/Home';
 import About from './components/About/About';
 import Favorite from './components/Favourite/Favorite';
-import { Routes, Route } from 'react-router-dom';
 import NotFound from './components/404/NotFound';
 import List from './components/List/List';
+import { Routes, Route } from 'react-router-dom';
+
 
 const App = () => {
   return (
-    <Container>
+    <main>
       <NavBar />
-      <Routes>
-        <Route path='/' element={<Home />} />
-        <Route path='/about' element={<About />} />
-        <Route path='/favorite' element={<Favorite />} />
-        <Route path='/*' element={<NotFound />} />
-        <Route path='/list' element={<List />} />
-        <Route path='/list/:listId' element={<List />} />
-      </Routes>
-    </Container>
+      <Container>
+        <Routes>
+          <Route path="/" element={<Home />} />
+          <Route path="/about" element={<About />} />
+          <Route path="/favorite" element={<Favorite />} />
+          <Route path="*" element={<NotFound />} />
+          <Route path="/list/:listId" element={<List />} />
+        </Routes>
+      </Container>
+ </main>
   );
 };
 
